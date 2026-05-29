@@ -174,7 +174,7 @@ const UserDetail = () => {
     <div className="p-6">
       <div className="mb-6">
         <button
-          onClick={() => navigate('/dashboard/users')}
+          onClick={() => navigate('/admin/users')}
           className="text-blue-600 hover:text-blue-700 flex items-center"
         >
           <svg className="w-5 h-5 mr-1" fill="none" viewBox="0 0 24 24" stroke="currentColor">

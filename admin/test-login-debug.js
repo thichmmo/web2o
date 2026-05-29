@@ -32,7 +32,7 @@ import { chromium } from 'playwright';
   });
 
   console.log('1. Navigating to login page...');
-  await page.goto('http://localhost:5175/login');
+  await page.goto('http://localhost:5173/admin/login');
   await page.waitForTimeout(2000);
 
   console.log('2. Filling in credentials...');

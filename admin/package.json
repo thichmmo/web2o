@@ -4,7 +4,7 @@
   "description": "Admin Frontend for Thich Cuu Facebook Tool",
   "type": "module",
   "scripts": {
-    "dev": "vite --port 5174",
+    "dev": "echo Admin is served by the frontend app at /admin. Run npm run dev --workspace=frontend.",
     "build": "vite build",
     "preview": "vite preview",
     "lint": "eslint src/"

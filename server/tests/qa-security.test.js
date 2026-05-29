@@ -1,6 +1,10 @@
 const request = require('supertest');
 const fs = require('fs');
 const path = require('path');
+
+process.env.RATE_LIMIT_WINDOW_MS = process.env.RATE_LIMIT_WINDOW_MS || '60000';
+process.env.RATE_LIMIT_MAX_REQUESTS = '100';
+
 const app = require('../src/app');
 const db = require('../src/models');
 const seedDemo = require('../scripts/seed-demo');

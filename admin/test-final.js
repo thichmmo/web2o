@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
   const page = await context.newPage();
 
   console.log('1. Login...');
-  await page.goto('http://localhost:5175/login');
+  await page.goto('http://localhost:5173/admin/login');
   await page.fill('input[name="email"]', 'admin@thichcuu.com');
   await page.fill('input[name="password"]', 'Admin@123456');
   await page.click('button[type="submit"]');

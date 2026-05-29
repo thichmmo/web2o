@@ -596,7 +596,7 @@ Tất cả tài liệu chi tiết nằm trong `.claude/docs/`:
 - Premium user: `premium.user@example.test` / `Demo@123456`.
 - Backend: `http://localhost:3001/api/v1`.
 - User frontend: `http://localhost:5173`.
-- Admin frontend: `http://localhost:5175`.
+- Admin route: `http://localhost:5173/admin`.
 - Luu y: Facebook OAuth/publish live, SMTP send live va payment live can credential/env that. Dev/mock flow da test pass.
 - Update them: Page carousel publish da co Facebook Ad Account dropdown/validation. Bai live cua `premium.user@example.test` tren Page `Admin set` da publish voi `fbPostId=372874445919974_122214297548538429`, `facebookCreativeId=1693991625065943`.
 - Update them: Fix loi `Invalid parameter` cho post `abc abc` co Card 1 video/Card 2 image. Backend them `image_hash` thumbnail cho video child attachment va chi cho dung ad account status `1`/`ACTIVE`. Post da publish voi `fbPostId=372874445919974_122214303860538429`, `facebookCreativeId=1702768317628336`.
@@ -604,4 +604,5 @@ Tất cả tài liệu chi tiết nằm trong `.claude/docs/`:
 - Update 2026-05-28: Fix System Settings branding. Backend now serves `/uploads`, Helmet allows cross-origin branding images, public branding endpoint added at `/api/v1/settings/public`, admin Settings preview URL fixed, and admin/user UI uses saved site name/logo/favicon. Regression now 18/18 backend tests plus admin/frontend build pass.
 - Update 2026-05-28: Verify/fix Card Settings locks/media. Card 1 lock now enforced by backend, Card 2 Premium lock regression covered, allowed media types enforced for user uploads and admin default media uploads. Regression now 19/19 backend tests plus admin/frontend build pass; live API smoke pass.
 - Update 2026-05-29: Added public landing page at `http://localhost:5173/`, with branding from `/api/v1/settings/public`, pricing from new `GET /api/v1/public/plans`, and real app screenshot asset `frontend/public/landing-dashboard.png`. Regression now 20/20 backend tests; frontend build and Playwright landing smoke pass.
+- Update 2026-05-29: Fixed blank user frontend, then moved admin back under the same frontend origin at `/admin` for hosting. `npm.cmd run dev` now starts only backend + frontend; admin login is `http://localhost:5173/admin/login`. Backend tests, frontend build, and Playwright same-port admin smoke pass.
 - Port `127.0.0.1:3000` dang bi `Kinx Auto.exe` chiem nen local dev dung backend `3001`.

@@ -23,8 +23,8 @@ Da chay full QA theo checklist Admin Panel, User Frontend va API/security. Qua t
 - Backend: Express/Sequelize/MySQL.
 - Database local: `thichcuu_fb_tool`.
 - Backend API: `http://localhost:3001/api/v1`.
-- User frontend: `http://localhost:5173`.
-- Admin frontend: `http://localhost:5175`.
+- User/Admin frontend: `http://localhost:5173`.
+- Admin route: `http://localhost:5173/admin`.
 - Node/NPM workspace project.
 - Dung `npm.cmd` tren PowerShell.
 
@@ -348,6 +348,26 @@ npm.cmd run seed:demo --workspace=server
 - Route `/dashboard` van protected; user chua login truy cap dashboard bi redirect `/login`.
 - Regression: `npm.cmd test --workspace=server -- --runInBand` -> 20/20 pass; `npm.cmd run build --workspace=frontend` pass; Playwright smoke `/` pass, pricing/API/image asset pass.
 
+## Update 2026-05-29 - Fix blank frontend
+
+- Loi moi: `http://localhost:5173` trang trang do user frontend import bo admin pages cu nhung service API admin noi bo bi lech backend.
+- Da sua `frontend/src/services/adminApi.js` de export day du `adminAPI` va cac named APIs dang duoc admin pages su dung.
+- Da sua Vite proxy frontend ve backend `http://localhost:3001`.
+- Da sua test rate limit de dung nguong test on dinh, khong phu thuoc `RATE_LIMIT_MAX_REQUESTS` local trong `.env`.
+- Regression: `npm.cmd run build --workspace=frontend` pass; `npm.cmd test --workspace=server -- --runInBand` -> 20/20 pass.
+- Playwright smoke pass: landing `/`, user login premium, admin login cung origin.
+
+## Update 2026-05-29 - Dua Admin ve cung frontend route `/admin`
+
+- Yeu cau moi: khi len host chi co 1 frontend origin, admin phai la `domain/admin`, khong tach frontend admin sang port rieng.
+- Da dua admin routes tro lai user frontend tai `/admin/*` va them `AdminProtectedRoute` doc `admin_token/admin_user`.
+- Da sua `frontend/src/services/adminApi.js` de dung cac endpoint backend hien tai va normalize response cho cac admin pages cu.
+- Da sua admin user detail/list route tu `/dashboard/users` sang `/admin/users`.
+- Root `npm.cmd run dev` bay gio chi start backend va frontend; khong start admin frontend rieng.
+- CORS/env example chi can frontend origin `http://localhost:5173`.
+- Regression: `npm.cmd run build --workspace=frontend` pass; `npm.cmd test --workspace=server -- --runInBand` -> 20/20 pass.
+- Playwright smoke pass tren cung port: `/admin` redirect `/admin/login` khi chua login; user thuong bi chan; admin login vao `/admin`; `/admin/users`, `/admin/plans`, `/admin/settings`, `/admin/card-settings`, `/admin/posts` load du lieu; user dashboard van hoat dong.
+
 ## 16. Huong dan chay project va kiem tra thu cong
 
 Chay tung terminal:
@@ -355,19 +375,18 @@ Chay tung terminal:
 ```powershell
 npm.cmd run dev:server
 npm.cmd run dev:frontend
-npm.cmd run dev:admin
 ```
 
 Mo:
 
 - Backend health: `http://localhost:3001/health`
 - User frontend: `http://localhost:5173`
-- Admin frontend: `http://localhost:5175`
+- Admin route: `http://localhost:5173/admin`
 
 Neu PowerShell chan `npm`, dung `npm.cmd`.
 
 Admin login hien da duoc verify:
 
-- URL: `http://localhost:5175/login`
+- URL: `http://localhost:5173/admin/login`
 - Email: `admin@thichcuu.com`
 - Password: `Admin@123456`

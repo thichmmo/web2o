@@ -2,6 +2,7 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { Provider } from 'react-redux';
 import store from './store';
 import ProtectedRoute from './components/ProtectedRoute';
+import AdminProtectedRoute from './components/AdminProtectedRoute';
 import DashboardLayout from './layouts/DashboardLayout';
 import AdminLayout from './layouts/AdminLayout';
 import Landing from './pages/Landing';
@@ -15,7 +16,6 @@ import PostDetail from './pages/PostDetail';
 import Subscription from './pages/Subscription';
 import Profile from './pages/Profile';
 
-// Admin Pages
 import AdminLogin from './pages/admin/Login';
 import AdminDashboard from './pages/admin/Dashboard';
 import UserManagement from './pages/admin/UserManagement';
@@ -52,15 +52,13 @@ function App() {
             <Route path="profile" element={<Profile />} />
           </Route>
 
-          {/* Admin Routes */}
           <Route path="/admin/login" element={<AdminLogin />} />
-
           <Route
             path="/admin"
             element={
-              <ProtectedRoute requiredRole="admin">
+              <AdminProtectedRoute>
                 <AdminLayout />
-              </ProtectedRoute>
+              </AdminProtectedRoute>
             }
           >
             <Route index element={<AdminDashboard />} />

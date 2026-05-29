@@ -88,28 +88,21 @@ Script này sẽ:
 cd server
 npm run dev
 
-# Terminal 2 - Frontend (User)
+# Terminal 2 - Frontend (User + Admin /admin)
 cd frontend
-npm run dev
-
-# Terminal 3 - Admin Panel
-cd admin
 npm run dev
 ```
 
 Truy cập:
 - Frontend: http://localhost:5173
-- Admin: http://localhost:5174
-- API: http://localhost:3000
+- Admin: http://localhost:5173/admin
+- API: http://localhost:3001
 
 ## 📦 Build Production
 
 ```bash
 # Build frontend
 cd frontend && npm run build
-
-# Build admin
-cd admin && npm run build
 
 # Start server
 cd server && npm start

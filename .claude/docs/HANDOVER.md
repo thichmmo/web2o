@@ -6,7 +6,7 @@ Ngay cap nhat: 2026-05-27
 
 - Backend live: `http://localhost:3001/api/v1`
 - User frontend: `http://localhost:5173`
-- Admin frontend: `http://localhost:5175`
+- Admin route: `http://localhost:5173/admin`
 - Admin login da verify: `admin@thichcuu.com` / `Admin@123456`
 - Free user: `free.user@example.test` / `Demo@123456`
 - Premium user: `premium.user@example.test` / `Demo@123456`
@@ -42,6 +42,7 @@ Ngay cap nhat: 2026-05-27
 - Update 2026-05-28: Fix System Settings branding. Backend serves `/uploads`, Helmet allows cross-origin branding images, public branding endpoint added at `/api/v1/settings/public`, admin Settings preview URL fixed, and admin/user UI uses saved site name/logo/favicon. Regression now 18/18 backend tests plus admin/frontend build pass.
 - Update 2026-05-28: Verify/fix Card Settings locks/media. Card 1 lock now enforced by backend, Card 2 Premium lock regression covered, allowed media types enforced for user uploads and admin default media uploads. Regression now 19/19 backend tests plus admin/frontend build pass; live API smoke pass.
 - Update 2026-05-29: Added public landing page at `http://localhost:5173/`, with branding from `/api/v1/settings/public`, pricing from new `GET /api/v1/public/plans`, and real app screenshot asset `frontend/public/landing-dashboard.png`. Regression now 20/20 backend tests; frontend build and Playwright landing smoke pass.
+- Update 2026-05-29: Fixed blank user frontend, then moved admin back under the same frontend origin at `/admin` for hosting. `npm.cmd run dev` now starts only backend + frontend; admin login is `http://localhost:5173/admin/login`. Backend tests, frontend build, and Playwright same-port admin smoke pass.
 - API smoke rong -> pass cho admin/users/plans/card/settings/user/Facebook/posts.
 - Live API login va admin user detail -> pass.
 
@@ -67,7 +68,6 @@ Chay app:
 ```powershell
 npm.cmd run dev:server
 npm.cmd run dev:frontend
-npm.cmd run dev:admin
 ```
 
 Report day du: `QA-FULL-TEST-AND-FIX-REPORT.md`.

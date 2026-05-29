@@ -46,6 +46,10 @@ export const applyDocumentBranding = (branding, titlePrefix = '') => {
   customStyle.textContent = branding.custom_css || '';
 };
 
+export const notifyBrandingUpdated = () => {
+  window.dispatchEvent(new Event('branding-updated'));
+};
+
 export const usePublicBranding = (titlePrefix = '') => {
   const [branding, setBranding] = useState(DEFAULT_BRANDING);
 
@@ -66,9 +70,11 @@ export const usePublicBranding = (titlePrefix = '') => {
     };
 
     loadBranding();
+    window.addEventListener('branding-updated', loadBranding);
 
     return () => {
       mounted = false;
+      window.removeEventListener('branding-updated', loadBranding);
     };
   }, [titlePrefix]);
 

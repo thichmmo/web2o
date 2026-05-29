@@ -6,7 +6,7 @@ import { chromium } from 'playwright';
   const page = await context.newPage();
 
   console.log('1. Navigating to login page...');
-  await page.goto('http://localhost:5175/login');
+  await page.goto('http://localhost:5173/admin/login');
   await page.waitForTimeout(2000);
   await page.screenshot({ path: 'screenshot-1-login-page.png' });
 

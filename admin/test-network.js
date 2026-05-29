@@ -8,26 +8,26 @@ import { chromium } from 'playwright';
   // Capture all network requests
   page.on('request', request => {
     const url = request.url();
-    if (url.includes('localhost:3000')) {
+    if (url.includes('localhost:3001')) {
       console.log(`→ ${request.method()} ${url}`);
       const authHeader = request.headers()['authorization'];
       if (authHeader) {
-        console.log(`  Auth: ${authHeader.substring(0, 30)}...`);
+        console.log('  Auth: PRESENT');
       } else {
-        console.log(`  Auth: NONE`);
+        console.log('  Auth: NONE');
       }
     }
   });
 
   page.on('response', async response => {
     const url = response.url();
-    if (url.includes('localhost:3000')) {
+    if (url.includes('localhost:3001')) {
       console.log(`← ${response.status()} ${url}`);
     }
   });
 
   console.log('1. Navigating to login page...');
-  await page.goto('http://localhost:5175/login');
+  await page.goto('http://localhost:5173/admin/login');
   await page.waitForTimeout(2000);
 
   console.log('2. Filling credentials and submitting...');
