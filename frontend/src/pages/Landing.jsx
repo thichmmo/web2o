@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
+import { useSelector, useDispatch } from 'react-redux';
+import { logout } from '../store/slices/authSlice';
 import { publicAPI } from '../services/api';
 import { getAssetUrl, usePublicBranding } from '../utils/branding';
 
@@ -55,6 +56,8 @@ const featureText = (plan) => {
 
 const Landing = () => {
   const branding = usePublicBranding();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [plans, setPlans] = useState([]);
 
@@ -72,6 +75,11 @@ const Landing = () => {
 
   const ctaTarget = isAuthenticated ? '/dashboard' : '/register';
   const ctaLabel = isAuthenticated ? 'Vao dashboard' : 'Dang ky dung thu';
+
+  const handleLogout = () => {
+    dispatch(logout());
+    navigate('/');
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-blue-50 to-white text-gray-900">
@@ -115,6 +123,12 @@ const Landing = () => {
                       Admin
                     </Link>
                   )}
+                  <button
+                    onClick={handleLogout}
+                    className="rounded-lg bg-red-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105 hover:bg-red-600"
+                  >
+                    Đăng xuất
+                  </button>
                 </>
               ) : (
                 <>
