@@ -55,7 +55,7 @@ const featureText = (plan) => {
 
 const Landing = () => {
   const branding = usePublicBranding();
-  const { isAuthenticated } = useSelector((state) => state.auth);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
   const [plans, setPlans] = useState([]);
 
   useEffect(() => {
@@ -95,19 +95,44 @@ const Landing = () => {
               )}
             </Link>
             <div className="flex items-center gap-3">
-              <Link
-                to="/login"
-                className="px-4 py-2 text-sm font-medium text-white/90 hover:text-white transition-colors"
-              >
-                Đăng nhập
-              </Link>
-              <Link
-                to={ctaTarget}
-                className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold shadow-lg transition-all hover:shadow-xl hover:scale-105"
-                style={{ color: primaryColor }}
-              >
-                {ctaLabel}
-              </Link>
+              {isAuthenticated ? (
+                <>
+                  <span className="text-sm text-white/90">
+                    Xin chào, <span className="font-semibold text-white">{user?.fullName}</span>
+                  </span>
+                  <Link
+                    to="/dashboard"
+                    className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold shadow-lg transition-all hover:shadow-xl hover:scale-105"
+                    style={{ color: primaryColor }}
+                  >
+                    Vào Dashboard
+                  </Link>
+                  {user?.role === 'admin' && (
+                    <Link
+                      to="/admin"
+                      className="rounded-lg bg-yellow-500 px-5 py-2.5 text-sm font-semibold text-white shadow-lg transition-all hover:shadow-xl hover:scale-105"
+                    >
+                      Admin
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <>
+                  <Link
+                    to="/login"
+                    className="px-4 py-2 text-sm font-medium text-white/90 hover:text-white transition-colors"
+                  >
+                    Đăng nhập
+                  </Link>
+                  <Link
+                    to={ctaTarget}
+                    className="rounded-lg bg-white px-5 py-2.5 text-sm font-semibold shadow-lg transition-all hover:shadow-xl hover:scale-105"
+                    style={{ color: primaryColor }}
+                  >
+                    {ctaLabel}
+                  </Link>
+                </>
+              )}
             </div>
           </nav>
 
